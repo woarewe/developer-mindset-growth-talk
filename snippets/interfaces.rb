@@ -15,8 +15,8 @@ end
 class Local < ApplicationRecord
   has_many :assets, as: :storagable
 
-  def save_to_disk(file)
-    File.open(Rails.root.join(file.name), 'w') { |f| f.write(file.to_s) }
+  def save_to_disk(asset)
+    File.open(Rails.root.join(asset.name), 'w') { |f| f.write(asset.content) }
   end
 end
 
@@ -26,7 +26,7 @@ def refresh_blob(asset)
   when Remote
     storagable.upload_to_s3(asset.blob)
   when Local
-    storage.save_to_disk(asset.blob)
+    storage.save_to_disk(asset)
   end
 end
 
