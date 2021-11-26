@@ -3,7 +3,7 @@
 class SyncService
   def perform(params)
     # does some logic
-    HTTP::Client.new.post('/data', params.fetch(:data)
+    HTTP::Client.new.post('/data', params.fetch(:data))
   end
 end
 
