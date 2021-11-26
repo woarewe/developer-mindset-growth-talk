@@ -10,11 +10,21 @@ def display_pro_badge?
   current_user.pro?
 end
 
+def stars_count
+  return 0 unless current_user
+
+  current_user.stars.size
+end
+
 # Good
 
 class Guest
   def pro?
     false
+  end
+
+  def stars
+    []
   end
 end
 
@@ -24,4 +34,8 @@ end
 
 def display_pro_badge?
   current_user.pro?
+end
+
+def stars_count
+  current_user.stars.size
 end
