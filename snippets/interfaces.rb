@@ -8,7 +8,7 @@ class Remote < ApplicationRecord
   has_many :assets, as: :storagable
 
   def upload_to_s3(file)
-    Amazon::S3.new(token: amazon_s3_token).upload(file)
+    # uploads a file to AWS S3
   end
 end
 
@@ -16,7 +16,7 @@ class Local < ApplicationRecord
   has_many :assets, as: :storagable
 
   def save_to_disk(asset)
-    File.open(Rails.root.join(asset.name), 'w') { |f| f.write(asset.content) }
+    # saves an asset to disk
   end
 end
 
@@ -24,9 +24,9 @@ def refresh_blob(asset)
   storagable = asset.storagable
   case storagable
   when Remote
-    storagable.upload_to_s3(asset.blob)
+    storagable.upload_to_s3(asset.file)
   when Local
-    storage.save_to_disk(asset)
+    storagable.save_to_disk(asset)
   end
 end
 
@@ -47,11 +47,11 @@ class Remote < ApplicationRecord
   has_many :assets, as: :storagable
 
   def upload_to_s3(file)
-    Amazon::S3.new(token: amazon_s3_token).upload(file)
+    # uploads a file to AWS S3
   end
 
   def save_asset(asset)
-    upload_to_s3(asset.blob)
+    upload_to_s3(asset.file)
   end
 end
 
@@ -61,7 +61,7 @@ class Local < ApplicationRecord
   has_many :assets, as: :storagable
 
   def save_to_disk(asset)
-    File.open(Rails.root.join(asset.name), 'w') { |f| f.write(asset.content) }
+    # saves an asset to disk
   end
   alias save_asset save_to_disk
 end
