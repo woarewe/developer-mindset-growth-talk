@@ -8,7 +8,7 @@ class Bulding
 end
 
 def building_city(building)
-  building && building.address && building.address.city
+  building.address && building.address.city
 end
 
 # Good
@@ -26,7 +26,5 @@ class Bulding
 end
 
 def building_city(building)
-  building && building.address_city
+  building.address_city
 end
-
-
