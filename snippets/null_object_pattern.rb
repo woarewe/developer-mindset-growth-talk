@@ -1,20 +1,22 @@
 # Bad
 
 def current_user
-  User.find_by(token: params[:token])
+  # returns a current user or nil
 end
 
-def display_pro_badge?
-  return false unless current_user
+def chat_username
+  return 'Guest' unless current_user
 
   current_user.pro?
 end
 
-def stars_count
-  return 0 unless current_user
+def chat_avatar_path
+  return '/guest.png' unless current_user
 
-  current_user.stars.size
+  current_user.avatar_path
 end
+
+
 
 # Good
 
