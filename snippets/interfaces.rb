@@ -5,12 +5,16 @@ class Asset < ApplicationRecord
 end
 
 class Remote < ApplicationRecord
+  # associations and scopes
+
   def upload_to_s3(file)
     # uploads a file to AWS S3
   end
 end
 
 class Local < ApplicationRecord
+  # associations and scopes
+
   def save_to_disk(asset)
     # saves an asset to disk
   end
@@ -40,6 +44,8 @@ end
 class Remote < ApplicationRecord
   include Storagable
 
+  # associations and scopes
+
   def upload_to_s3(file)
     # uploads a file to AWS S3
   end
@@ -51,6 +57,8 @@ end
 
 class Local < ApplicationRecord
   include Storagable
+
+  # associations and scopes
 
   def save_to_disk(asset)
     # saves an asset to disk

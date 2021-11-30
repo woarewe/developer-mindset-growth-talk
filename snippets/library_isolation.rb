@@ -3,11 +3,22 @@
 # Gemfile
 gem 'bugsnag'
 
-def perform(params)
-  # does some business logic
-rescue => error
-  Bugsnag.notify(error)
+class ServiceA
+  def call(params)
+    # does some business logic
+  rescue => error
+    Bugsnag.notify(error)
+  end
 end
+
+class ServiceB
+  def call(params)
+    # does some business logic
+  rescue => error
+    Bugsnag.notify(error)
+  end
+end
+
 
 # Good
 
@@ -21,8 +32,18 @@ class Bugtracker
   end
 end
 
-def perform(params)
-  # does some business logic
-rescue => error
-  Bugtracker.notify(error)
+class ServiceA
+  def call(params)
+    # does some business logic
+  rescue => error
+    Bugtracker.notify(error)
+  end
+end
+
+class ServiceB
+  def call(params)
+    # does some business logic
+  rescue => error
+    Bugtracker.notify(error)
+  end
 end

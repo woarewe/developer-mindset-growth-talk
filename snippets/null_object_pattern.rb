@@ -1,43 +1,53 @@
 # Bad
 
-def current_user
-  # returns a current user or nil
+module ApplicationHelper
+  GUEST_USERNAME = 'Guest'
+  GUEST_AVATAR_PATH = '/guest.jpg'
+
+  def current_user
+    User.find_by(token: param[:token])
+  end
+  
+  def chat_username
+    return GUEST_USERNAME unless current_user
+  
+    current_user.username
+  end
+  
+  def chat_avatar_path
+    return GUEST_AVATAR_PATH unless current_user
+  
+    current_user.avatar_path
+  end
 end
-
-def chat_username
-  return 'Guest' unless current_user
-
-  current_user.pro?
-end
-
-def chat_avatar_path
-  return '/guest.png' unless current_user
-
-  current_user.avatar_path
-end
-
 
 
 # Good
 
 class Guest
-  def pro?
-    false
+  USERNAME = 'Guest'
+  AVATAR_PATH = '/guest.jpg'
+
+  def username
+    USERNAME
   end
 
-  def stars
-    []
+  def avatar_path
+    AVATAR_PATH
   end
 end
 
-def current_user
-  User.find_by(token: params[:token]) || Guest.new
+module ApplicationHelper
+  def current_user
+    User.find_by(token: param[:token]) || Guest.new
+  end
+  
+  def chat_username
+    current_user.username
+  end
+  
+  def chat_avatar_path
+    current_user.avatar_path
+  end
 end
 
-def display_pro_badge?
-  current_user.pro?
-end
-
-def stars_count
-  current_user.stars.size
-end
