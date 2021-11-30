@@ -5,16 +5,12 @@ class Asset < ApplicationRecord
 end
 
 class Remote < ApplicationRecord
-  has_many :assets, as: :storagable
-
   def upload_to_s3(file)
     # uploads a file to AWS S3
   end
 end
 
 class Local < ApplicationRecord
-  has_many :assets, as: :storagable
-
   def save_to_disk(asset)
     # saves an asset to disk
   end
@@ -44,8 +40,6 @@ end
 class Remote < ApplicationRecord
   include Storagable
 
-  has_many :assets, as: :storagable
-
   def upload_to_s3(file)
     # uploads a file to AWS S3
   end
@@ -57,8 +51,6 @@ end
 
 class Local < ApplicationRecord
   include Storagable
-
-  has_many :assets, as: :storagable
 
   def save_to_disk(asset)
     # saves an asset to disk
