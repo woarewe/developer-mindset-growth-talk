@@ -1,9 +1,19 @@
 # Bad
-def full_name(user)
-  user.first_name + ' ' + user.last_name
+
+class User
+  # many other methods
+
+  def full_name
+    first_name + ' ' + last_name
+  end
 end
 
 # Good
-def full_name(user)
-  "#{user.first_name} #{user.last_name}"
+
+class User
+  # many other methods
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

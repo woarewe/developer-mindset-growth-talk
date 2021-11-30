@@ -1,16 +1,19 @@
 # Bad
 
-def create_user(params)
-  # does some business logic
-rescue => error
-  Bugtracker.notify(error) if Rails.env.production?
+class CreateUser
+  def call(params)
+    # does some business logic
+  rescue => error
+    Bugtracker.notify(error) if Rails.env.production?
+  end
 end
 
-
-def create_post(params)
-  # does some buisness logic
-rescue => error
-  Bugtracker.notify(error) if Rails.env.production?
+class CreatePost
+  def call(params)
+    # does some business logic
+  rescue => error
+    Bugtracker.notify(error) if Rails.env.production?
+  end
 end
 
 # Good
@@ -30,21 +33,7 @@ class BugtrackerFactory
   end
 end
 
-
-def create_user(params)
-  # does some business logic
-rescue => error
-  BugtrackerFactory.build.notify(error)
-end
-
-
-def create_post(params)
-  # does some buisness logic
-rescue => error
-  BugtrackerFactory.build.notify(error)
-end
-
-class ServiceA
+class CreateUser
   def call(params)
     # does some business logic
   rescue => error
@@ -52,7 +41,7 @@ class ServiceA
   end
 end
 
-class ServiceB
+class CreatePost
   def call(params)
     # does some business logic
   rescue => error
