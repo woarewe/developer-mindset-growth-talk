@@ -26,7 +26,7 @@ class BugtrackerFactory
 
   def self.build
     if Rails.env.production?
-      Bugsnag
+      Bugtracker
     else
       Fake
     end
@@ -48,7 +48,3 @@ class CreatePost
     BugtrackerFactory.build.notify(error)
   end
 end
-
-
-
-
